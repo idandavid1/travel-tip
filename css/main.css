@@ -10,3 +10,7 @@
 body {
     background-color: chocolate;
 }
+
+* {
+    box-sizing: border-box;
+}
