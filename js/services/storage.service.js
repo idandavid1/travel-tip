@@ -3,11 +3,11 @@ export const localStorage = {
     getItem: loadFromStorage
 }
 
-function saveToStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value))
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
 }
 
 function loadFromStorage(key) {
-    const data = localStorage.getItem(key)
-    return (data) ? JSON.parse(data) : undefined
+    const val = localStorage.getItem(key)
+    return JSON.parse(val)
 }
