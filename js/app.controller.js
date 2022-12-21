@@ -1,6 +1,6 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-import { storageService } from './services/async-storage.service.js'
+// import { storageService } from './services/async-storage.service.js'
 
 
 window.onload = onInit
@@ -55,13 +55,15 @@ function onPanTo() {
     mapService.panTo(35.6895, 139.6917)
 }
 
-function onClickMap(location){
+function onClickMap(location) {
     console.log('location:', location)
-    const name = getLocationName()
+    mapService.getNameByCoords(location).then(name => {
+        renderTable(location, name)
+    })
 
 
 }
 
-function renderTable(location, name){
-
+function renderTable(location, name) {
+console.log(name)
 }

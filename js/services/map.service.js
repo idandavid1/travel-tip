@@ -1,7 +1,8 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getNameByCoords
 }
 
 
@@ -19,7 +20,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             gMap.addListener("click", (mapsMouseEvent) => {
-                onClickMap({lat: mapsMouseEvent.latLng.lat(), lng: mapsMouseEvent.latLng.lng()})})
+                onClickMap({ lat: mapsMouseEvent.latLng.lat(), lng: mapsMouseEvent.latLng.lng() })
+            })
             console.log('Map!', gMap)
         })
 }
@@ -52,3 +54,10 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
+
+function getNameByCoords(location) {
+    const API_KEY = 'AIzaSyBPSnSB3KM1tGH3au7TEh0NXRhzvaRQZlA'
+    var coords = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${API_KEY}`
+    return axios.get(coords).then(res => res.data.results[0].formatted_address)
+}
+
