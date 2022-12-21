@@ -1,9 +1,11 @@
+import { storageService } from "./storage.service"
+
 export const storageService = {
     post,   // Create
     get,    // Read
     put,    // Update
     remove, // Delete
-    query,  // List 
+    query // List 
 }
 
 function query(entityType, delay = 500) {
