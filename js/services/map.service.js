@@ -4,7 +4,8 @@ export const mapService = {
     panTo,
     getNameByCoords,
     zoom,
-    getUserLocation
+    getUserLocation,
+    getCoordsByName
 }
 
 
@@ -67,6 +68,12 @@ function getNameByCoords(location) {
     return axios.get(coords).then(res => res.data.results[0].formatted_address)
 }
 
+function getCoordsByName(name) {
+    const API_KEY = 'AIzaSyBPSnSB3KM1tGH3au7TEh0NXRhzvaRQZlA'
+    var coords = `https://maps.googleapis.com/maps/api/geocode/json?address=${name}&key=${API_KEY}`
+    return axios.get(coords).then(res => res.data.results[0].geometry.location)
+}
+
 function getUserLocation() {
     navigator.geolocation.getCurrentPosition(showLocation, handleLocationError)
 }
@@ -96,4 +103,6 @@ function handleLocationError(error){
     }
     console.log('locationError:', locationError)
 }
+
+
 

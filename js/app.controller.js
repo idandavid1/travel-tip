@@ -10,12 +10,18 @@ window.onClickMap = onClickMap
 window.onGo = onGo
 window.onDelete = onDelete
 window.onMyLocation = onMyLocation
+window.onEnterLocation = onEnterLocation
+window.onCopyLocation = onCopyLocation
+
+
+var gCurrLocation = {lat: 30, lng: 30}
 
 function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
             renderTable()
+            renderFilterByQueryStringParams()
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -73,10 +79,10 @@ function renderTable() {
         const strHTMLs = locations.map(location => {
             return `
             <tr>
-             <td>${location.name}</td>
-             <td>${location.lat, location.lng}</td>
-             <td><button onclick="onGo('${location.id}')">Go</button></td>
-             <td><button onclick="onDelete('${location.id}')">Delete</button></td>
+                <td>${location.name}</td>
+                <td>${location.lat}, ${location.lng}</td>
+                <td><button onclick="onGo('${location.id}')">Go</button></td>
+                <td><button onclick="onDelete('${location.id}')">Delete</button></td>
             </tr>`
         })
         document.querySelector('.table-content').innerHTML = strHTMLs.join('')
@@ -89,11 +95,52 @@ function onDelete(locId) {
 
 function onGo(locId) {
     locService.get(locId).then(location => {
-        onPanTo(location.lat, location.lng) 
-        onZoom()
+        changeLocationOnMap(location.lat, location.lng)
+        renderNameLocation(location.name)
     })
+}
+
+function changeLocationOnMap(lat, lng) {
+    onSetUrlByLoc(lat, lng)
+    onPanTo(lat, lng) 
+    onZoom()
 }
 
 function onMyLocation() {
     mapService.getUserLocation()
 }
+
+function onEnterLocation(ev) {
+    ev.preventDefault()
+    const name = document.querySelector('input').value
+    mapService.getCoordsByName(name).then(location => {
+        locService.post(name, location.lat, location.lng)
+        changeLocationOnMap(location.lat, location.lng)
+        renderTable()
+        renderNameLocation(name)
+    })
+}
+
+function renderNameLocation(name) {
+    document.querySelector('.curr-location-name span').innerText = name
+}
+
+function onCopyLocation() {
+    navigator.clipboard.writeText(`https://idandavid1.github.io/travel-tip/index.html?lat=${gCurrLocation.lat}&lng=${gCurrLocation.lng}`)
+}
+
+function onSetUrlByLoc(lat, lng) {
+    const queryStringParams = `?lat=${lat}&lng=${lng}`
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringParams
+    window.history.pushState({ path: newUrl }, '', newUrl)
+
+}
+
+function renderFilterByQueryStringParams() {
+    const queryStringParams = new URLSearchParams(window.location.search)
+        const lat = +queryStringParams.get('lat') || 0
+        const lng = +queryStringParams.get('lng') || 0
+    if (!lat && !lng) return
+    changeLocationOnMap(lat, lng)
+}
+

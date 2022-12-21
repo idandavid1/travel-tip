@@ -12,15 +12,17 @@
     <header class="flex space-between">
         <h1>TravelTip</h1>
         <div class="change-location">
-            <input type="text" placeholder="Enter location">
-            <button>Go</button>
+            <form onsubmit="onEnterLocation(event)">
+                <input type="text" placeholder="Enter location">
+                <button>Go</button>
+            </form>
             <button onclick="onMyLocation()">My location</button>
         </div>
     </header>
     <main>
         <section class="flex space-between">
-            <div>Location: <span></span></div>
-            <button>Copy location</button>
+            <div class="curr-location-name">Location: <span></span></div>
+            <button onclick="onCopyLocation()">Copy location</button>
         </section>
         <section class="main-content grid">
             <div id="map"></div>
