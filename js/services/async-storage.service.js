@@ -1,4 +1,3 @@
-import { localStorage } from './storage.service.js'
 
 export const storageService = {
     post,   // Create
@@ -16,8 +15,8 @@ function query(entityType, delay = 500) {
 function get(entityType, entityId) {
     return query(entityType).then(entities => {
         const entity = entities.find(entity => entity.id === entityId)
-        // if (!entity) return Promise.reject(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
-        if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
+        if (!entity) return Promise.reject(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
+        // if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
         return entity
     })
 }
