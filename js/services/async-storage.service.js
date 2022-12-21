@@ -1,4 +1,4 @@
-import { storageService } from "./storage.service"
+import { localStorage } from './storage.service.js'
 
 export const storageService = {
     post,   // Create
