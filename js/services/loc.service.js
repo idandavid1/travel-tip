@@ -1,6 +1,6 @@
 // import { util } from './services/util.service.js'
 import { mapService } from './map.service.js'
-import { storageService } from './services/async-storage.service.js'
+import { storageService } from './async-storage.service.js'
 
 export const locService = {
     getLocs,
