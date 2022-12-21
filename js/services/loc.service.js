@@ -20,6 +20,17 @@ function getLocs() {
     })
 }
 
+function createLoc(name, lat, lng) {
+    return {
+            name,
+            lat,
+            lng,
+            weather: '',
+            createdAt: Date.now(),
+            updatedAt: Date.now()
+             }
+}
+
 function _makeId(length = 5) {
     var txt = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
