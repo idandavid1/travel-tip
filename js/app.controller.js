@@ -57,4 +57,11 @@ function onPanTo() {
 
 function onClickMap(location){
     console.log('location:', location)
+    const name = getLocationName()
+
+
+}
+
+function renderTable(location, name){
+
 }

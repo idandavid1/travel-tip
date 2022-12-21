@@ -1,4 +1,4 @@
-import { util } from './services/util.service.js'
+// import { util } from './services/util.service.js'
 
 export const locService = {
     getLocs
@@ -6,8 +6,8 @@ export const locService = {
 
 
 const locs = [
-    {id: util.makeId, name: 'Greatplace', lat: 32.047104, lng: 34.832384, weather: '', createdAt: Date.now, updatedAt: Date.now }, 
-    {id: util.makeId, name: 'Neveragain', lat: 32.047201, lng: 34.832581, weather: '', createdAt: Date.now, updatedAt: Date.now  }
+    {id: _makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384, weather: '', createdAt: Date.now, updatedAt: Date.now }, 
+    {id: _makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581, weather: '', createdAt: Date.now, updatedAt: Date.now  }
 ]
 
 function getLocs() {
@@ -16,6 +16,15 @@ function getLocs() {
             resolve(locs)
         }, 2000)
     })
+}
+
+function _makeId(length = 5) {
+    var txt = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return txt
 }
 
 
