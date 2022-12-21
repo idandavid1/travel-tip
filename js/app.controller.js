@@ -7,6 +7,8 @@ window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onClickMap = onClickMap
+window.onGo = onGo
+window.onDelete = onDelete
 
 function onInit() {
     mapService.initMap()
@@ -49,9 +51,9 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
-function onPanTo() {
-    console.log('Panning the Map')
-    mapService.panTo(35.6895, 139.6917)
+function onPanTo(lat = 35, lng = 139) {
+    // console.log('Panning the Map')
+    mapService.panTo(lat, lng)
 }
 
 function onClickMap(location) {
@@ -73,5 +75,15 @@ function renderTable() {
             </tr>`
         })
         document.querySelector('.table-content').innerHTML = strHTMLs.join('')
+    })
+}
+
+function onDelete(locId) {
+    locService.remove(locId).then(renderTable)
+}
+
+function onGo(locId) {
+    locService.get(locId).then(location => {
+        onPanTo(location.lat, location.lng) 
     })
 }

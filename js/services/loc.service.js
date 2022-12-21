@@ -50,7 +50,7 @@ function post(name, lat, lng) {
 }
 
 function remove(locId) {
-     storageService.remove(LOC_KEY, locId)
+     return storageService.remove(LOC_KEY, locId)
 } 
 
 function _makeId(length = 5) {
