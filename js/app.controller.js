@@ -126,7 +126,7 @@ function renderNameLocation(name) {
 }
 
 function onCopyLocation() {
-    navigator.clipboard.writeText(`https://idandavid1.github.io/travel-tip/index.html?lat=${gCurrLocation.lat}&lng=${gCurrLocation.lng}`)
+    navigator.clipboard.writeText(`https://idandavid1.github.io/travel-tip/${window.location.href}`)
 }
 
 function onSetUrlByLoc(lat, lng) {
