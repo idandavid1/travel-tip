@@ -6,3 +6,7 @@
 /* Cmps */
 @import './cmps/header.css';
 @import './cmps/main.css';
+
+body {
+    background-color: chocolate;
+}
