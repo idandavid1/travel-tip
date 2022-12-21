@@ -52,8 +52,13 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
+
 function onPanTo(lat = 35, lng = 139) {
     mapService.panTo(lat, lng)
+}
+
+function onZoom() {
+    mapService.zoom()
 }
 
 function onClickMap(location) {
@@ -85,6 +90,7 @@ function onDelete(locId) {
 function onGo(locId) {
     locService.get(locId).then(location => {
         onPanTo(location.lat, location.lng) 
+        onZoom()
     })
 }
 
@@ -96,7 +102,7 @@ function showLocation(position) {
     console.log(position)
     const {latitude: lat, longitude: lng} = position.coords
     onPanTo({lat, lng})
-    // map.setZoom(getUserZoom())
+    onZoom()
 }
 
 function handleLocationError(error){
