@@ -28,7 +28,7 @@ function createLoc(name, lat, lng) {
             weather: '',
             createdAt: Date.now(),
             updatedAt: Date.now()
-             }
+        }
 }
 
 function _makeId(length = 5) {
