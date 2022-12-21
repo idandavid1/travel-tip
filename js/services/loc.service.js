@@ -3,7 +3,11 @@ import { mapService } from './map.service.js'
 import { storageService } from './services/async-storage.service.js'
 
 export const locService = {
-    getLocs
+    getLocs,
+    get,
+    post,
+    query,
+    remove
 }
 
 const LOC_KEY = 'locDB'
@@ -21,6 +25,17 @@ function getLocs() {
     })
 }
 
+function _createLoc(name, lat, lng) {
+    return {
+        name,
+        lat,
+        lng,
+        weather: '',
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+    }
+}
+
 function get(locId) {
     return storageService.get(LOC_KEY, locId)
 }
@@ -29,6 +44,13 @@ function query() {
     return storageService.query(LOC_KEY)
 }
 
+function post(name, lat, lng) {
+    storageService.post(LOC_KEY, _createLoc(name, lat, lng))
+}
+
+function remove(locId) {
+     storageService.remove(LOC_KEY, locId)
+} 
 
 function _makeId(length = 5) {
     var txt = ''
