@@ -46,7 +46,7 @@ function query() {
 }
 
 function post(name, lat, lng) {
-    storageService.post(LOC_KEY, _createLoc(name, lat, lng))
+    return storageService.post(LOC_KEY, _createLoc(name, lat, lng))
 }
 
 function remove(locId) {

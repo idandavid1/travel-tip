@@ -9,6 +9,7 @@ window.onGetUserPos = onGetUserPos
 window.onClickMap = onClickMap
 window.onGo = onGo
 window.onDelete = onDelete
+window.onMyLocation = onMyLocation
 
 function onInit() {
     mapService.initMap()
@@ -52,7 +53,6 @@ function onGetUserPos() {
         })
 }
 function onPanTo(lat = 35, lng = 139) {
-    // console.log('Panning the Map')
     mapService.panTo(lat, lng)
 }
 
@@ -86,4 +86,34 @@ function onGo(locId) {
     locService.get(locId).then(location => {
         onPanTo(location.lat, location.lng) 
     })
+}
+
+function onMyLocation() {
+    navigator.geolocation.getCurrentPosition(showLocation, handleLocationError)
+}
+
+function showLocation(position) {     
+    console.log(position)
+    const {latitude: lat, longitude: lng} = position.coords
+    onPanTo({lat, lng})
+    // map.setZoom(getUserZoom())
+}
+
+function handleLocationError(error){
+    var locationError
+    switch (error.code) {
+        case 0:
+            locationError = "There was an error while retrieving your location: " + error.message
+            break
+        case 1:
+            locationError = "The user didn't allow this page to retrieve a location."
+            break
+        case 2:
+            locationError = "The browser was unable to determine your location: " + error.message
+            break
+        case 3:
+            locationError = "The browser timed out before retrieving the location."
+            break
+    }
+    console.log('locationError:', locationError)
 }
