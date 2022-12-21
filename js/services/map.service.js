@@ -3,7 +3,8 @@ export const mapService = {
     addMarker,
     panTo,
     getNameByCoords,
-    zoom
+    zoom,
+    getUserLocation
 }
 
 
@@ -64,5 +65,35 @@ function getNameByCoords(location) {
     const API_KEY = 'AIzaSyBPSnSB3KM1tGH3au7TEh0NXRhzvaRQZlA'
     var coords = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${API_KEY}`
     return axios.get(coords).then(res => res.data.results[0].formatted_address)
+}
+
+function getUserLocation() {
+    navigator.geolocation.getCurrentPosition(showLocation, handleLocationError)
+}
+
+function showLocation(position) {     
+    console.log(position)
+    const {latitude: lat, longitude: lng} = position.coords
+    panTo(lat, lng)
+    zoom()
+}
+
+function handleLocationError(error){
+    var locationError
+    switch (error.code) {
+        case 0:
+            locationError = "There was an error while retrieving your location: " + error.message
+            break
+        case 1:
+            locationError = "The user didn't allow this page to retrieve a location."
+            break
+        case 2:
+            locationError = "The browser was unable to determine your location: " + error.message
+            break
+        case 3:
+            locationError = "The browser timed out before retrieving the location."
+            break
+    }
+    console.log('locationError:', locationError)
 }
 

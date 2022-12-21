@@ -95,31 +95,5 @@ function onGo(locId) {
 }
 
 function onMyLocation() {
-    navigator.geolocation.getCurrentPosition(showLocation, handleLocationError)
-}
-
-function showLocation(position) {     
-    console.log(position)
-    const {latitude: lat, longitude: lng} = position.coords
-    onPanTo({lat, lng})
-    onZoom()
-}
-
-function handleLocationError(error){
-    var locationError
-    switch (error.code) {
-        case 0:
-            locationError = "There was an error while retrieving your location: " + error.message
-            break
-        case 1:
-            locationError = "The user didn't allow this page to retrieve a location."
-            break
-        case 2:
-            locationError = "The browser was unable to determine your location: " + error.message
-            break
-        case 3:
-            locationError = "The browser timed out before retrieving the location."
-            break
-    }
-    console.log('locationError:', locationError)
+    mapService.getUserLocation()
 }
