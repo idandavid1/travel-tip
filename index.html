@@ -7,14 +7,16 @@
     <title>TravelTip</title>
 </head>
 <body>
-    <header class="flex">
+    <header class="flex space-between">
         <h1>TravelTip</h1>
-        <input type="text" placeholder="Enter location">
-        <button>Go</button>
-        <button>My location</button>
+        <div class="change-location">
+            <input type="text" placeholder="Enter location">
+            <button>Go</button>
+            <button>My location</button>
+        </div>
     </header>
     <main>
-        <section>
+        <section class="flex">
             <div>Location: <span></span></div>
             <button>Copy location</button>
         </section>
