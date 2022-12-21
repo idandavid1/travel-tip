@@ -5,7 +5,8 @@ export const mapService = {
     getNameByCoords,
     zoom,
     getUserLocation,
-    getCoordsByName
+    getCoordsByName,
+    getWeather
 }
 
 
@@ -78,14 +79,14 @@ function getUserLocation() {
     navigator.geolocation.getCurrentPosition(showLocation, handleLocationError)
 }
 
-function showLocation(position) {     
+function showLocation(position) {
     console.log(position)
-    const {latitude: lat, longitude: lng} = position.coords
+    const { latitude: lat, longitude: lng } = position.coords
     panTo(lat, lng)
     zoom()
 }
 
-function handleLocationError(error){
+function handleLocationError(error) {
     var locationError
     switch (error.code) {
         case 0:
@@ -102,6 +103,12 @@ function handleLocationError(error){
             break
     }
     console.log('locationError:', locationError)
+}
+
+function getWeather(lat, lon) {
+    const API_KEY = 'f25bc4012c0c313be475ddc6dc91ffd3'
+    var url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`
+    return axios.get(url).then(res => res.data)
 }
 
 

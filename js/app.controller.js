@@ -14,7 +14,7 @@ window.onEnterLocation = onEnterLocation
 window.onCopyLocation = onCopyLocation
 
 
-var gCurrLocation = {lat: 30, lng: 30}
+var gCurrLocation = { lat: 30, lng: 30 }
 
 function onInit() {
     mapService.initMap()
@@ -22,6 +22,7 @@ function onInit() {
             console.log('Map is ready')
             renderTable()
             renderFilterByQueryStringParams()
+            get
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -102,8 +103,10 @@ function onGo(locId) {
 
 function changeLocationOnMap(lat, lng) {
     onSetUrlByLoc(lat, lng)
-    onPanTo(lat, lng) 
+    onPanTo(lat, lng)
     onZoom()
+    renderWeather(mapService.getWeather(lat, lng))
+
 }
 
 function onMyLocation() {
@@ -138,9 +141,19 @@ function onSetUrlByLoc(lat, lng) {
 
 function renderFilterByQueryStringParams() {
     const queryStringParams = new URLSearchParams(window.location.search)
-        const lat = +queryStringParams.get('lat') || 0
-        const lng = +queryStringParams.get('lng') || 0
+    const lat = +queryStringParams.get('lat') || 0
+    const lng = +queryStringParams.get('lng') || 0
     if (!lat && !lng) return
     changeLocationOnMap(lat, lng)
 }
 
+
+function renderWeather(weather) {
+    weather.then(weather => {
+      const strHTML =  `<h2>Weather Today</h2>
+            <div class="icon">&#${weather.weather[0].icon}</div>
+           <div class="desc">${weather.weather[0].description}</div>
+           <div class="temp">${weather.main.temp} F temprature from ${weather.main.temp_min} F to ${weather.main.temp_max} F, wind ${weather.wind.speed} m/s</div>`
+           document.querySelector('.weather').innerHTML = strHTML
+    })
+}

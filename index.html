@@ -11,7 +11,7 @@
 <body>
     <header class="flex space-between">
         <h1>TravelTip</h1>
-        <div class="change-location">
+        <div class="change-location flex space-between">
             <form onsubmit="onEnterLocation(event)">
                 <input type="text" placeholder="Enter location">
                 <button>Go</button>
@@ -26,7 +26,7 @@
         </section>
         <section class="main-content grid">
             <div id="map"></div>
-            <div class=" weather"></div>
+            <div class=" weather flex flex-column align-center space-between"></div>
             <table class="location">
                 <thead>
                     <tr>

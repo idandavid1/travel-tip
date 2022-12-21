@@ -16,9 +16,16 @@
 
 .location{
     grid-area: location;
+    background-color: rgb(64, 54, 54);
+    color:antiquewhite
 }
 
 .weather{
     grid-area: weather;
     background-color: aqua;
 }
+
+.temp {
+    margin-bottom: 19.920px;
+}
+
