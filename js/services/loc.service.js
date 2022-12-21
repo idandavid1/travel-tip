@@ -1,4 +1,5 @@
 // import { util } from './services/util.service.js'
+import { mapService } from './map.service.js'
 import { storageService } from './services/async-storage.service.js'
 
 export const locService = {
@@ -8,8 +9,8 @@ export const locService = {
 const LOC_KEY = 'locDB'
 
 const locs = [
-    {id: _makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384, weather: '', createdAt: Date.now(), updatedAt: Date.now() }, 
-    {id: _makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581, weather: '', createdAt: Date.now(), updatedAt: Date.now() }
+    { id: _makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384, weather: '', createdAt: Date.now(), updatedAt: Date.now() },
+    { id: _makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581, weather: '', createdAt: Date.now(), updatedAt: Date.now() }
 ]
 
 function getLocs() {
@@ -19,6 +20,15 @@ function getLocs() {
         }, 2000)
     })
 }
+
+function get(locId) {
+    return storageService.get(LOC_KEY, locId)
+}
+
+function query() {
+    return storageService.query(LOC_KEY)
+}
+
 
 function _makeId(length = 5) {
     var txt = ''
