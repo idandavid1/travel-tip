@@ -8,6 +8,8 @@
 
 #map {
     grid-area: map;
+    width: 400px;
+    height: 500px;
 }
 
 .location{
