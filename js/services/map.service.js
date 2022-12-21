@@ -19,7 +19,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 zoom: 15
             })
             gMap.addListener("click", (mapsMouseEvent) => {
-                ({lat: mapsMouseEvent.latLng.lat(), lng: mapsMouseEvent.latLng.lng()})})
+                onClickMap({lat: mapsMouseEvent.latLng.lat(), lng: mapsMouseEvent.latLng.lng()})})
             console.log('Map!', gMap)
         })
 }
@@ -52,3 +52,4 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
+
