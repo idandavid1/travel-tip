@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
     <title>TravelTip</title>
 </head>
 <body>
-    <header>
+    <header class="flex">
         <h1>TravelTip</h1>
         <input type="text" placeholder="Enter location">
         <button>Go</button>
@@ -17,10 +18,10 @@
             <div>Location: <span></span></div>
             <button>Copy location</button>
         </section>
-        <section class="main-content">
-            <div id="map" style="width: 50%; height: 400px;"></div>
-            <div style="width: 50%; height: 400px; background-color: aqua;"></div>
-            <table></table>
+        <section class="main-content grid">
+            <div id="map""></div>
+            <div class="weather"></div>
+            <table class="location"></table>
         </section>
     </main>
 <!--     
