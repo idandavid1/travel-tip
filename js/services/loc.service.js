@@ -27,6 +27,7 @@ function getLocs() {
 
 function _createLoc(name, lat, lng) {
     return {
+            id: _makeId(),
             name,
             lat,
             lng,

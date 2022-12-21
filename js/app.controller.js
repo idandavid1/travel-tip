@@ -62,7 +62,7 @@ function onClickMap(location) {
 }
 
 function renderTable() {
-    locService.get().then(locations => {
+    locService.query().then(locations => {
         const strHTMLs = locations.map(location => {
             return `
             <tr>
