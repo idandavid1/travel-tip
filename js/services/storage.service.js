@@ -1,6 +1,6 @@
-export const storageService = {
-    saveToStorage,
-    loadFromStorage
+export const localStorage = {
+    setItem: saveToStorage,
+    getItem: loadFromStorage
 }
 
 function saveToStorage(key, value) {
