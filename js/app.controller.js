@@ -12,6 +12,7 @@ function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
+            renderTable()
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -54,14 +55,23 @@ function onPanTo() {
 }
 
 function onClickMap(location) {
-    console.log('location:', location)
     mapService.getNameByCoords(location).then(name => {
-        renderTable(location, name)
+        locService.post(name, location.lat, location.lng)
+        renderTable()
     })
-
-
 }
 
-function renderTable(location, name) {
-console.log(name)
+function renderTable() {
+    locService.get().then(locations => {
+        const strHTMLs = locations.map(location => {
+            return `
+            <tr>
+             <td>${location.name}</td>
+             <td>${location.lat, location.lng}</td>
+             <td><button onclick="onGo('${location.id}')">Go</button></td>
+             <td><button onclick="onDelete('${location.id}')">Delete</button></td>
+            </tr>`
+        })
+        document.querySelector('.table-content').innerHTML = strHTMLs.join('')
+    })
 }
