@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <title>TravelTip</title>
 </head>
+
 <body>
     <header class="flex space-between">
         <h1>TravelTip</h1>
@@ -22,7 +24,7 @@
         </section>
         <section class="main-content grid">
             <div id="map""></div>
-            <div class="weather"></div>
+            <div class=" weather"></div>
             <table class="location">
                 <thead>
                     <tr>
@@ -35,7 +37,7 @@
             </table>
         </section>
     </main>
-<!--     
+    <!--     
     <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
     <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
     <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
@@ -46,7 +48,8 @@
         <pre class="locs"></pre>
     </p>
      -->
-
+    <script src="lib/axios.js"></script>
     <script type="module" src="js/app.controller.js"></script>
 </body>
+
 </html>
