@@ -4,7 +4,6 @@ import { mapService } from './services/map.service.js'
 window.onload = onInit
 window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
-window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onClickMap = onClickMap
 window.onGo = onGo
@@ -13,39 +12,19 @@ window.onMyLocation = onMyLocation
 window.onEnterLocation = onEnterLocation
 window.onCopyLocation = onCopyLocation
 
-
-var gCurrLocation = { lat: 30, lng: 30 }
-
 function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
             renderTable()
             renderFilterByQueryStringParams()
-            get
         })
         .catch(() => console.log('Error: cannot init map'))
-}
-
-// This function provides a Promise API to the callback-based-api of getCurrentPosition
-function getPosition() {
-    console.log('Getting Pos')
-    return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    })
 }
 
 function onAddMarker() {
     console.log('Adding a marker')
     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
-}
-
-function onGetLocs() {
-    locService.getLocs()
-        .then(locs => {
-            console.log('Locations:', locs)
-            document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
-        })
 }
 
 function onGetUserPos() {
@@ -70,7 +49,9 @@ function onZoom() {
 
 function onClickMap(location) {
     mapService.getNameByCoords(location).then(name => {
+        changeLocationOnMap(location.lat, location.lng)
         locService.post(name, location.lat, location.lng)
+        renderNameLocation(name)
         renderTable()
     })
 }
@@ -129,7 +110,10 @@ function renderNameLocation(name) {
 }
 
 function onCopyLocation() {
-    navigator.clipboard.writeText(`https://idandavid1.github.io/travel-tip/${window.location.href}`)
+    const queryStringParams = new URLSearchParams(window.location.search)
+    const lat = +queryStringParams.get('lat') || 0
+    const lng = +queryStringParams.get('lng') || 0
+    navigator.clipboard.writeText(`https://github.io/me/travelTip/index.html?lat=${lat}&lng=${lng}`)
 }
 
 function onSetUrlByLoc(lat, lng) {
@@ -151,9 +135,9 @@ function renderFilterByQueryStringParams() {
 function renderWeather(weather) {
     weather.then(weather => {
       const strHTML =  `<h2>Weather Today</h2>
-            <div class="icon">&#${weather.weather[0].icon}</div>
+            <div class="icon">&#x${weather.weather[0].icon};</div>
            <div class="desc">${weather.weather[0].description}</div>
-           <div class="temp">${weather.main.temp} F temprature from ${weather.main.temp_min} F to ${weather.main.temp_max} F, wind ${weather.wind.speed} m/s</div>`
+           <div class="temp">${weather.main.temp} F temperature from ${weather.main.temp_min} F to ${weather.main.temp_max} F, wind ${weather.wind.speed} m/s</div>`
            document.querySelector('.weather').innerHTML = strHTML
     })
 }

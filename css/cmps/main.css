@@ -1,6 +1,7 @@
 
 .main-content{
     grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr 2fr;
     grid-template-areas:
     'weather map'
     'location map';
@@ -28,4 +29,5 @@
 .temp {
     margin-bottom: 19.920px;
 }
+
 

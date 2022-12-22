@@ -1,9 +1,6 @@
-// import { util } from './services/util.service.js'
-import { mapService } from './map.service.js'
 import { storageService } from './async-storage.service.js'
 
 export const locService = {
-    getLocs,
     get,
     post,
     query,
@@ -11,19 +8,6 @@ export const locService = {
 }
 
 const LOC_KEY = 'locDB'
-
-const locs = [
-    { id: _makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384, weather: '', createdAt: Date.now(), updatedAt: Date.now() },
-    { id: _makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581, weather: '', createdAt: Date.now(), updatedAt: Date.now() }
-]
-
-function getLocs() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(locs)
-        }, 2000)
-    })
-}
 
 function _createLoc(name, lat, lng) {
     return {
